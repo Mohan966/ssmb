@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+  <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="./css/bootstapmap.css"  type="text/css" />
+        <link rel="stylesheet" href="./css/stylemap.css"  type="text/css" />
+<title>CCMS</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<link href="./css/sb-admin.css" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
+<style>
+.container-fluid { padding-left:15px; padding-right:15px;}
+.h3, h3 { margin:0; font-size:17px; font-weight:bold;}
+.panel-body { padding:5px;}
+.panel-heading { padding:10px 5px;}
+.lead { font-size:15px; margin-top:10px; margin-bottom:5px;}
+@media screen and (max-width: 480px) {
+#page-wrapper { margin-top:60px;}
+.page-header { margin-top:0px; margin-bottom:20px;}
+}
+#googleMap{
+         widows: 100%; 
+         height:400px; 
+}
+ h1{
+                 color:#248003; 
+                 padding-top:30px;
+                 font-weight: bold;
+                 font-style: italic;
+                 }
+</style>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<input type="hidden" name="ccmsData" id="ccmsData">
+<div>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    
+                </button>
+                <a class="navbar-brand" href="/CCMS/login"><img src="./images/ccms_logo.jpg" alt=""></a>
+              </div>
+                 <!-- Top Menu Items -->
+           <ul class="nav navbar-left top-nav">
+	          <li><a href="/CCMS/login"><i class="glyphicon glyphicon-home"></i> Home</a></li>	
+              </ul>
+          
+			  <ul class="nav navbar-left hidden-xs">
+			    <li class="brand"><img src="./images/SefeLogo.jpg"></li></ul>
+               
+            
+            <ul class="nav navbar-right hidden-xs">
+              <li class="brand"><a class="navbar-brand" href="index.html"><img src="./images/bhimavaram-logo.png" alt=""></a></li>
+             </ul>
+			 
+         
+        </nav>
+        </div>
+  <div id="page-wrapper">
+    <div class="container-fluid">
+    <h1 style="text-align: center;">&emsp; DASHBOARD</h1><br>
+  <!--    <h1 class="page-header">${mname} Street Lights CCMS Dashboard</h1> -->
+    <div class="row" style="display:none;">
+	<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+	<div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="panel-body text-center">
+							<i class="fa fa-lightbulb-o fa-4x"></i>
+                        <p class="lead">Total Lights</p>
+						<h3>${totalLights}</h3>
+                            </div>
+                        </div>
+                        
+                    </div>
+	</div>
+	<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+	<div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="panel-body text-center">
+							<i class="fa fa-check fa-4x"></i>
+                        <p class="lead">Lights On</p>
+						<h3>${lightsON}</h3>
+                            </div>
+                        </div>                      
+                    </div>
+	</div>
+	<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+	<div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="panel-body text-center">
+							<i class="fa fa-times fa-4x"></i>
+                        <p class="lead">Lights Off</p>
+						<h3>${lightsOFF}</h3>
+                            </div>
+                        </div>                       
+                    </div>
+	</div>
+	<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+	<div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="panel-body text-center">
+							<i class="fa fa-line-chart fa-4x"></i>
+                        <p class="lead">% of Lights On</p>
+						<h3>${percentLightsON}</h3>
+                            </div>
+                        </div>                       
+                    </div>
+	</div>
+	<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="display:none">
+	<div class="panel panel-purple">
+                        <div class="panel-heading">
+                           <div class="panel-body text-center">
+							<i class="fa fa-lightbulb-o fa-4x"></i>
+                        <p class="lead">Non-Glowing Lights</p>
+						<h3>${nonGlowinglights}</h3>
+                            </div>
+                        </div>                       
+                    </div>
+	</div>
+	<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+	<div class="panel panel-pink">
+                        <div class="panel-heading">
+                           <div class="panel-body text-center">
+							<i class="fa fa-tachometer fa-4x"></i>
+                        <p class="lead"><span class="hidden-xs">Cumulative</span> Consumption</p>
+						<h3>${cumulativeCosumption}Kwh</h3>
+                            </div>
+                        </div>                      
+                    </div>
+	</div>
+	
+	
+	</div>
+	<div class="panel panel-default">
+	<div class="panel-body">
+ <div id="googleMap" style=" height: 350px; padding-left: 10px; padding-right: 10px;">
+</div></div>
+	
+    </div>
+  </div>
+</div>
+ <div class=" col-md-9">
+                        <div class="innerFooterSection" style="height: 40px;margin-left: 20px; padding-top:15px!important;">
+                            <div class="col-md-2 mapdesc">
+                                <img src="./images/red.png" style="width: 14px;height: 20px">
+                                CCMS OFF
+                            </div>  
+                            <div class="col-md-2 mapdesc">
+                                <img src="./images/green.png" style="width: 14px;height: 20px">
+                                CCMS ON
+                            </div> 
+                            <div class="col-md-2 mapdesc">
+                                <img src="./images/blue.png" style="width: 14px;height: 20px">
+                                NON GLOWING
+                            </div> 
+                            <div class="col-md-2 mapdesc">
+                                <img src="./images/yellow.png" style="width: 14px;height: 20px">
+                                CCMS TRIP
+                            </div> 
+                            <!-- <div class="col-md-2 mapdesc">
+                                <img src="./images/pink.png" style="width: 14px;height: 20px">
+                                CCMS Manual Mode
+                            </div>  -->
+                        </div>
+                    </div>
+
+<div class="footer text-center visible-xs">
+<p><img src="./images/jeneffco-logo.jpg"></p>
+</div>
+<script src="./js/jquery.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+<script type="text/javascript" src="https://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
+<script language="javascript" type="text/javascript">
+var markers = [
+<%
+ArrayList<LocationBean> locationList=(ArrayList<LocationBean>)session.getAttribute("locationList");
+System.out.print("locationList:JSP:"+locationList.size());
+
+for(LocationBean lb:locationList){
+	System.out.print("locationList::"+lb.getLocationId());
+	if(lb.getStatus()=="active"){
+		%>
+		
+		{
+	        "title": '',
+	        "lat": '<%=lb.getLatitude()  %>',
+	        "lng": '<%=lb.getLongitude()  %>',
+	        "description": '<%=lb.getLocationId()  %>',
+	        "RelayStatus":  'NOCOMM',
+	         "Address":  '<%=lb.getLocationName()  %>',
+	          "TotalLights":  '<%=lb.getNoOfLightsConnected()  %>',
+	          "LoadConnected": '<%=lb.getLoadConnected()  %>'
+	    },
+	   
+		<%
+	}  else	if(lb.getLoadConnected()>0.0){
+	%>
+	
+	{
+		
+        "title": '',
+        "lat": '<%=lb.getLatitude()  %>',
+        "lng": '<%=lb.getLongitude()  %>',
+        "description": '<%=lb.getLocationId()  %>',
+        "RelayStatus":  'ON',
+         "Address":  '<%=lb.getLocationName()  %>',
+          "TotalLights":  '<%=lb.getNoOfLightsConnected()  %>',
+          "LoadConnected": '<%=lb.getLoadConnected()  %>'
+    },
+   
+	<%
+	}else{
+		%>
+		{
+	        "title": '',
+	        "lat": '<%=lb.getLatitude()  %>',
+	        "lng": '<%=lb.getLongitude()  %>',
+	        "description": '<%=lb.getLocationId()  %>',
+	        "RelayStatus":  'OFF',
+	         "Address":  '<%=lb.getLocationName()  %>',
+	          "TotalLights":  '<%=lb.getNoOfLightsConnected()  %>',
+	          "LoadConnected": '<%=lb.getLoadConnected()  %>'
+	    },
+	<%}
+}
+%>
+];
+
+</script>
+<script type="text/javascript">
+    window.onload = function () {
+    	//Feb changes
+    	//alert("hi cm-dashboard.jsp");
+    	//console.log("hi cm-dashboard.jsp");
+    	//Feb changes
+        var mapOptions = {
+            center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+            zoom: 14,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+
+        };
+                // for city boundries
+                var NewarkHighlight;
+                var mNewarkCoords = new Array;
+
+
+        var infoWindow = new google.maps.InfoWindow();
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+
+        for (i = 0; i < markers.length; i++) {
+            var data = markers[i]
+            var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+              // city boundries
+           // mNewarkCoords[i] = new google.maps.LatLng(data.lat, data.lng);
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                animation: google.maps.Animation.DROP,
+                map: map,
+               title: ''
+
+            // title: data.title
+
+            });
+			//alert(data.LoadConnected);
+            if (data.RelayStatus == "ON") {
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+
+            }
+            else if (data.RelayStatus == "OFF") {
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+
+                data.ConLoad = 0;
+
+            }
+            else if (data.RelayStatus == "PARTIAL") marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');  // Partial on
+            else if (data.RelayStatus == "NOCOMM") {
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
+                data.ConLoad = 0;
+            }
+            else if (data.RelayStatus == "ON") marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green.png'); // Over Load
+            else marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+
+
+            //            if (data.RelayStatus == "ON") marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+            //            else if (data.RelayStatus == "OFF") marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+            //            else marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
+
+            //            var infoBubble = new  InfoBubble({
+            //                maxWidth: 300
+            //            });
+
+            //            var div = document.createElement('DIV');
+            //            div.innerHTML = 'Hello';
+
+            //            infoBubble.addTab('Tab 1', div);
+            //            infoBubble.addTab('Tab 2', "<B>This is tab 2</B>");
+
+            //            google.maps.event.addListener(marker, 'click', function () {
+            //                if (!infoBubble.isOpen()) {
+            //                    infoBubble.open(map, marker);
+            //                }
+            //            });
+
+
+            (function (marker, data) {
+                google.maps.event.addListener(marker, "click", function (e) {
+
+                    var content = '<table style="width: 400; height: 200;" bgcolor="#CCCCFF" border="2px"  cellspacing="2px">' +
+                    '<tr> ' +
+                    '<td style="width: 200;color: #000000; font-weight: bold">Station ID :</td> ' +
+                    '<td style="width: 200;color: #000000; font-weight: bold">'+ data.description+'</td> ' +
+                    '</tr> ' +
+                    
+                    '<tr> ' +
+                    '<td style="width: 200;color: #000000; font-weight: bold">Total no. of Lights Connected :</td> ' +
+                    '<td style="width: 200;color: #000000; font-weight: bold">' + data.TotalLights + '</td> ' +
+                    '</tr> ' +
+
+                    '<tr> ' +
+                    '<td style="width: 200;color: #000000; font-weight: bold">Total Connected Load  :</td> ' +
+                    '<td style="width: 200;color: #000000; font-weight: bold">' + data.LoadConnected + '</td> ' +
+                    '</tr> ' +
+
+                    
+
+                    '<tr> ' +
+                    '<td style="width: 200;color: #000000; font-weight: bold">Location/Address of the Box</td> ' +
+                    '<td style="width: 200;color: #000000; font-weight: bold">' + data.Address + '</td> ' +
+                    '</tr> ' +
+
+                    '<tr> ' +
+                    '<td style="width: 200;color: #000000; font-weight: bold">Latitude :' + data.lat + ' </td> ' +
+                    '<td style="width: 200;color: #000000; font-weight: bold">Longitude :' + data.lng + ' </td> ' +
+                    '</tr> ' +
+
+
+
+
+                    '</table>';
+
+                    infoWindow.setContent(content);
+                    //infoWindow.setContent(data.description);
+                    infoWindow.open(map, marker);
+                });
+            })(marker, data);
+            // Center the map after process
+
+
+//            function drawPolygon() {
+
+//                var shape = new google.maps.Polygon({
+//                    paths: mNewarkCoords,
+//                    strokeColor: '#CCCCFF',
+//                    strokeOpacity: 0.8,
+//                    strokeWeight: 2,
+//                    fillColor: '#CCCCFF',
+//                    fillOpacity: 0.35
+//                });
+
+//                shape.setMap(map);
+//            }
+
+//            drawPolygon();
+
+
+            //            // Construct the polygon
+            //            // Note that we don't specify an array or arrays, but instead just
+            //            // a simple array of LatLngs in the paths property
+            //            NewarkHighlight = new google.maps.Polygon({
+            //                paths: mNewarkCoords,
+            //                strokeColor: "#6666FF",
+            //                strokeOpacity: 0.8,
+            //                strokeWeight: 2,
+            //                fillColor: "#6666FF",
+            //                fillOpacity: 0.35
+            //            });
+            //            NewarkHighlight.setMap(map);
+        }
+    }
+
+
+</script>
+
+<script type="text/javascript">
+    var CurrentDateUTC = new Date();
+    var CurrentHours = CurrentDateUTC.getUTCHours();
+    var CurrentMinutes = CurrentDateUTC.getUTCMinutes();
+
+    if((CurrentHours == 12 && CurrentMinutes >= 30) || (CurrentHours > 12 && CurrentMinutes >= 0)){
+        $("#sLightsOn").text("3144");
+        $("#sLightsOff").text("107");
+        $("#sPercentLightsON").text("96.70%");
+    }
+    else {
+        $("#sLightsOn").text("0");
+        $("#sLightsOff").text("3251");
+        $("#sPercentLightsON").text("0.00%");
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,257 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>CDMS - Phase Settings</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<link href="./css/sb-admin.css" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
+<style>
+.form-horizontal .control-label {
+	text-align: left;
+}
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 2px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #bfffe7;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+<style type="text/css">
+.bs-example {
+	margin: 20px;
+}
+</style>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<%
+	String message = (String) session.getAttribute("MESSAGE");
+	session.removeAttribute("MESSAGE");
+%>
+
+
+<script>
+function reloadPage(){
+    location.reload(true);
+}
+</script>
+<body>
+
+	<div>
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/CCMS/login"><img
+					src="./images/ccms_logo.jpg" alt=""></a>
+			</div>
+			<!-- Top Menu Items -->
+			<b><ul class="nav navbar-left top-nav">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" aria-expanded="false"><i
+						class="fa fa-user"></i> User<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="/CCMS/login"><i class="fa fa-fw fa-lock"></i>
+								Home</a></li>
+						<li>
+                            <a href="/CCMS/AddCCMSUser"><i class="fa fa-fw fa-user"></i> Add User</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/UpdateCCMSUser"><i class="fa fa-fw fa-user"></i> Update User</a>
+                        </li>
+                        
+                        <li>
+						<li><a href="/CCMS/LocationHome"><i
+								class="glyphicon glyphicon-map-marker"></i> Add Location</a></li>
+						<li><a href="/CCMS/LocationUpdateView"><i
+								class="glyphicon glyphicon-map-marker"></i> Update Location</a></li>
+						<li class="divider"></li>
+						<li><a href="/CCMS/ccmsLogout"><i
+								class="fa fa-fw fa-power-off"></i> Log Out</a></li>
+					</ul></li>
+				
+				<li class="hidden-xs"><a href="#"><i
+						class="glyphicon glyphicon-comment"></i> About</a></li>
+				
+				<li><a href="#"><i
+						class="glyphicon glyphicon-question-sign"></i> Help</a></li>
+						 <li><a href="/CCMS/login"><i class="glyphicon glyphicon-home"></i> Home</a></li>	
+			</ul></b>
+
+			<ul class="nav navbar-right hidden-xs">
+				<li class="brand"><img src="images/SefeLogo.jpg"></li>
+			</ul>
+			</nav>
+	</div>
+
+	
+	
+	
+	<form role="form" action="/CCMS/savePhaseSettings" method="post">
+		<div id="page-wrapper">
+			<div class="container-fluid">
+	
+      <h1 style="color:#248003; font-weight:bold; font-style:italic; text-align: center;" class="page-header"> ${locationName} &emsp;${locationId}&nbsp;&nbsp;&nbsp; Load Settings</h1>
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2">
+						
+						   
+						<div class="row">
+
+
+
+							<div class="bs-example">
+								<table border="5px solid black" class="table" style="font-weight: bold; font-size:large">
+
+									<tbody id="customers">
+										<tr>
+											<td>Load 1</td>
+											
+											
+											<s:if test="%{rPhaseEnable=='checked'}">
+											<td><label class="radio-inline"><input	type="radio" name="rPhase" id="rPhase1" checked="checked" value="on">Enable </label></td>
+											<td><label class="radio-inline"><input type="radio" name="rPhase" id="rPhase2"  value="off">Disable </label></td>
+											</s:if>
+											<s:else>
+    										<td><label class="radio-inline"><input	type="radio" name="rPhase" id="rPhase1"  value="on">Enable </label></td>
+											<td><label class="radio-inline"><input type="radio" name="rPhase" id="rPhase2"  checked="checked" value="off">Disable </label></td>
+											
+											</s:else>
+											
+
+										</tr>
+										<tr>
+											<td>Load 2</td>
+											
+											<s:if test="%{yPhaseEnable=='checked'}">
+											<td><label class="radio-inline"><input	type="radio" name="yPhase" id="yPhase1" checked="checked" value="on">Enable </label></td>
+											<td><label class="radio-inline"><input type="radio" name="yPhase" id="yPhase2"  value="off">Disable </label></td>
+											</s:if>
+											<s:else>
+    										<td><label class="radio-inline"><input	type="radio" name="yPhase" id="yPhase1"  value="on">Enable </label></td>
+											<td><label class="radio-inline"><input type="radio" name="yPhase" id="yPhase2"  checked="checked" value="off">Disable </label></td>
+											
+											</s:else>
+										
+
+										</tr>
+										<tr>
+											<td>Load 3</td>
+											
+												<s:if test="%{bPhaseEnable=='checked'}">
+											<td><label class="radio-inline"><input	type="radio" name="bPhase" id="bPhase1" checked="checked" value="on">Enable </label></td>
+											<td><label class="radio-inline"><input type="radio" name="bPhase" id="bPhase2"  value="off">Disable </label></td>
+											</s:if>
+											<s:else>
+    										<td><label class="radio-inline"><input	type="radio" name="bPhase" id="bPhase1"  value="on">Enable </label></td>
+											<td><label class="radio-inline"><input type="radio" name="bPhase" id="bPhase2"  checked="checked" value="off">Disable </label></td>
+											
+											</s:else>
+										
+
+										</tr>
+										<tr>
+											<td>Aux Contact</td>
+											<s:if test="%{auxEnable=='checked'}">
+											<td><label class="radio-inline"><input	type="radio" name="auxPhase" id="auxPhase1" checked="checked" value="on">Enable </label></td>
+											<td><label class="radio-inline"><input type="radio" name="auxPhase" id="auxPhase2"  value="off">Disable </label></td>
+											</s:if>
+											<s:else>
+    										<td><label class="radio-inline"><input	type="radio" name="auxPhase" id="auxPhase1"  value="on">Enable </label></td>
+											<td><label class="radio-inline"><input type="radio" name="auxPhase" id="auxPhase2"  checked="checked" value="off">Disable </label></td>
+											
+											</s:else>
+											
+											
+										</tr>
+										<tr>
+											<td>LDR Mode</td>
+											<s:if test="%{ldrPhaseEnable=='checked'}">
+											<td><label class="radio-inline"><input	type="radio" name="ldrPhase" id="ldrrPhase1" checked="checked" value="on">Enable </label></td>
+											<td><label class="radio-inline"><input type="radio" name="ldrPhase" id="ldrrPhase2"  value="off">Disable </label></td>
+											</s:if>
+											<s:else>
+    										<td><label class="radio-inline"><input	type="radio" name="ldrPhase" id="ldrPhase1"  value="on">Enable </label></td>
+											<td><label class="radio-inline"><input type="radio" name="ldrPhase" id="ldrPhase2"  checked="checked" value="off">Disable </label></td>
+											
+											</s:else>
+											
+										
+
+										</tr>
+									</tbody>
+								</table>
+
+
+
+
+
+
+
+							</div>
+							<p class="text-center">
+								&emsp;&emsp;<button type="submit" class="btn btn-success" >Save</button>&emsp;&emsp;&emsp;&emsp;&emsp;<button type="button" class="btn btn-success" onclick="reloadPage();">Read</button>
+								
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
+	<div class="footer text-center visible-xs">
+		<p>
+			<img src="./images/jeneffco-logo.jpg">
+		</p>
+	</div>
+	<script src="./js/jquery.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+
+	<script>
+		
+	function read(){
+		if(!validate()){
+			return false;
+		}
+		document.phase.action = "C:/Users/ATS/Desktop/cc/phase-settings.html?locationId="+document.getElementById("selectedLocation").value+"&locationName="+document.getElementById("selectedLocationName").value;
+	    document.phase.read()
+	}
+</script>
+</body>
+</html>

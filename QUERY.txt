@@ -1,0 +1,3 @@
+INSERT INTO public.ccms_locations
+(state_code, dcode, mcode,location_id,location_name,latitude,longitude,no_lights_connected,simno,location_port,customer_name,load_connected) 
+VALUES (1237, 01 , 13, 01,'SUSTECH 3 MLC 1',17.4790876,78.580988,0,8919956258,0,sustech,0);

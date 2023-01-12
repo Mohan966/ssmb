@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@taglib  prefix="s" uri="/struts-tags" %>
+<!--DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"-->
+ 
+ 
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Dynamic Map...</title>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDWY0KKnNA61FTXZcGVPiyYMhBhPtvjrM4M&sensor=false"></script>
+<script src="./js/map.js" type="text/javascript"></script>
+<script src="./js/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+function zoomMap(mapId,location) {
+ initialize(mapId,location);
+}
+</script>
+ 
+  
+ <s:iterator var="ctx" value="locationlist" status="stat">
+  <div id="googleMap<s:property value=" id"="">" style="height: 100px;"/>
+   <a onclick="javascript:zoomMap('<s:property value=" id"="">','<s:property value="locationName"/>');">
+   <img alt="<s:property value=" class="float_left ">" id="mapimage" style="border: 2px solid light-gray;height: 88px;width: 322px;font-size: 11px;color:darkgreen;cursor: pointer;margin-left: 50%;" src="http://maps.googleapis.com/maps/api/staticmap?center=<s:property value="locationName"/>&markers=color:red%7C<s:property value="locationName"/>&zoom=10&size=250x80&scale=2&maptype=roadmap&sensor=false"/></a>
+   <div id="googleMap<s:property value=" id"="">" style="height: 2 0px;"/>
+  </div></div></s:iterator>

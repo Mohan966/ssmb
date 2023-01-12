@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>CDMS</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<link href="./css/sb-admin.css" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
+<link href="./css/wickedpicker.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<style>
+.form-horizontal .control-label {
+	text-align:left;
+}
+ h1{
+                 color:#248003; 
+                 font-weight: bold;
+                 font-style: italic;
+                 }
+
+</style>
+<style type="text/css">
+    table{
+        width: 33%;
+        margin: 2px 0;
+        border-collapse: collapse;
+    }
+    table, th, td{
+        border: 1px solid #cdcdcd;
+    }
+    table th, table td{
+        padding: 1px;
+        text-align: left;
+    }
+    .form-control {
+   width:90px;
+}
+input{
+width:90px;
+}
+.record
+{
+width:10px;
+}
+</style>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+
+<div >
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/CCMS/login"><img src="./images/ccms_logo.jpg" alt=""></a>
+            </div>
+            <!-- Top Menu Items -->
+			<b><ul class="nav navbar-left top-nav" style="font-weight:bold; font-size:large">
+        <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i> User<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                         <li>
+                            <a href="/CCMS/login"><i class="fa fa-fw fa-lock"></i> Home</a>
+                        </li>
+<li>
+                            <a href="/CCMS/AddCCMSUser"><i class="fa fa-fw fa-user"></i> Add User</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/ViewAllCCMSUser"><i class="fa fa-fw fa-user"></i> Update User</a>
+                        </li>
+                        
+                        <li>
+                        <li>
+                            <a href="/CCMS/LocationHome"><i class="glyphicon glyphicon-map-marker"></i> Add Location</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/LocationUpdateView"><i class="glyphicon glyphicon-map-marker"></i> Update Location</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/CCMS/ccmsLogout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+			  
+			  <li class="hidden-xs"><a href="#"><i class="glyphicon glyphicon-comment"></i> About</a></li>
+                  
+			      <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i> Help</a></li>	
+			       <li><a href="/CCMS/login"><i class="glyphicon glyphicon-home"></i> Home</a></li>	
+      </ul></b>
+
+			 <ul class="nav navbar-right hidden-xs">
+			    <li class="brand"><img src="images/SefeLogo.jpg"></li>
+			 </ul>
+			 </nav>
+           </div>
+           
+        
+         
+            <h1 style="text-align: center;" class="page-header">${locationName}&emsp; ${locationId} Annual Schedule </h1>
+        <div id="page-wrapper" style="text-align: center; font-weight:bold; font-size:large">
+			<div class="container-fluid">
+        
+     
+                      <label>Select Phase<span class="red">*</span></label>
+                     <select  name="sBook" id="sBook">
+                       <option value="0">Select</option>
+                      <option value="01" >R Phase</option>
+                       <option value="02" >Y Phase</option>
+                       <option value="03" >B Phase</option>
+                        <option value="04" >Aux Contact</option>
+                         
+                      </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="loading"></div>
+                      <br>                                
+								<table id="table" class="table-bordered" style="margin: 0px auto; font-weight:bold; font-size:large">
+								<thead><tr><th>Select</th><th>From Date</th><th>To Date</th><th>SCH No</th></tr></thead>
+									<tbody>
+									
+									
+										</tbody>
+										</table>
+	<div style="margin-top:20px;">
+	<input type="button" class="btn btn-success" id="addrow"   value="Add Row">&emsp;&emsp;&emsp;<button type="button" name="readSBook" id="readSBook" class="btn btn-success" >Read</button>&nbsp;&nbsp;&nbsp;<button type="button" name="saveAnnualScheduleBtn" id="saveAnnualScheduleBtn" class="btn btn-success" >Save</button>&nbsp;&nbsp;&nbsp;<button type="button" style="background-color:#2db300;  color:white" name="delete-row" id="delete-row"  class="btn btn-succes" >Delete</button>
+	</div>
+	
+   
+   </div></div>
+    
+<div class="footer text-center visible-xs">
+<p><img src="./images/jeneffco-logo.jpg"></p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        
+    	$('select').change(function () {
+    		reset_table()
+            
+        });
+    	
+    	function reset_table()
+    	 {
+    	    //$('table').find('input[type="text"], select').val('');
+    	    var tr = $('#table tbody tr');
+    	    tr.hide();
+    	 }
+    	
+        $("#addrow").click(function(){
+        	var rowCount = $('#table tr').length;
+        	var tbIdFrom="fdatepicker"+rowCount;
+        	var tbIdTo="tdatepicker"+rowCount;
+        	var tbIdSelect="tbIdSelect"+rowCount;
+           	var markup = "<tr><td><input type='checkbox' name='record' id=record' class='record'></td><td><input type='text' id='"+tbIdFrom+"' ></td><td><input type='text' id='"+tbIdTo+"' ></td><td><select class='form-control' id='"+tbIdSelect+"'><option value='01' >S1</option><option value='02' >S2</option><option value='03' >S3</option><option value='04' >S4</option><option value='05' >S5</option></select></td></tr>";
+            $("table tbody").append(markup);
+            $( "#"+tbIdFrom ).val("01-01-2022")
+            if(rowCount>1) {
+    	        var prevtbIdTo="tdatepicker"+(rowCount-1);
+    		if($( "#"+prevtbIdTo ).val()){
+    			$( "#"+tbIdFrom ).val($( "#"+prevtbIdTo ).val());
+    		}
+    		}
+            $( "#"+tbIdFrom ).datepicker({ dateFormat: 'dd-mm-yy' });
+            $( "#"+tbIdTo ).datepicker({ dateFormat: 'dd-mm-yy' });
+            
+        });
+        //$('#addrow').prop('disabled', true);
+        $('input[type=date]').on('input', function() {
+          if ($(( "#"+tbIdTo ).datepicker({ dateFormat: 'dd-mm-yy' })).val() !=='31-12-2022') {
+         $('#addrow').prop('disabled', false);
+      } else {
+       $('#addrow').prop('disabled', true);
+              }
+        });
+  
+        $(document).on('change', 'input', function() {
+            var rowCount = $('#table tr').length;
+         	var tbIdTo="tdatepicker"+(rowCount-1);
+     
+        if($( "#"+tbIdTo ).datepicker({ dateFormat: 'dd-mm-yy' }).val()=='31-12-2022')
+                {
+                      $("#addrow").prop('disabled', true);
+                }
+                 else{
+                        $("#addrow").prop('disabled', false);
+                     }
+        });
+        // Find and remove selected table rows
+        $("#delete-row").click(function(){
+            $("table tbody").find('input[name="record"]').each(function(){
+                if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
+                }
+                
+            });
+        });
+
+    });    
+
+    $("#readSBook").click(function refreshText(){
+    	$('#loading').html('<img width="50" height="50" src="./images/loader.gif"> <b>Please wait.... Reading the data');
+    	$('#table tbody').empty();
+        $.ajax({
+        	 url: "/CCMS/annualScheduleRead",
+        	 data:{'sBook': $('#sBook').val()},
+        	 dataType:"json",
+        	  success: function(jsonData){
+        		  var rowCount = $('#table tr').length;   	
+        		  $('#loading').html('');
+        		  var obj = jQuery.parseJSON(jsonData);
+        		  $.each(obj, function(key,value) {
+        			
+        		    	var tbIdFrom="fdatepicker"+rowCount;
+        	        	var tbIdTo="tdatepicker"+rowCount;
+        	        	var tbIdSelect="tbIdSelect"+rowCount;
+        	        	
+        	           	var markup = "<tr><td><input type='checkbox' name='record' id=record' class='record'></td><td><input type='text' size='10' id='"+tbIdFrom+"' value='"+value.fromDate1+"' ></td><td><input type='text' id='"+tbIdTo+"'  size='10' value='"+value.toDate1+"'></td><td><select class='form-control' id='"+tbIdSelect+"' name='"+tbIdSelect+"'><option value='1' >S1</option><option value='2'>S2</option><option value='3'>S3</option><option value='4'>S4</option><option value='5'>S5</option></select></td></tr>";
+        	            $("table tbody").append(markup);   
+        	            $( "#"+tbIdFrom ).datepicker({ dateFormat: 'dd-mm-yy' });
+        	            $( "#"+tbIdTo ).datepicker({ dateFormat: 'dd-mm-yy' });
+        	            
+        	            $("#"+tbIdSelect+" option[value="+value.schBookNo+"]").prop('selected', true);
+                   rowCount=rowCount+1;
+                   
+                  // alert($("#"+tbIdTo).val());
+                   if ( $("#"+tbIdTo).val() == "31-12-2022")
+                  	 {
+                  	 return false;
+                  	 } 
+               
+        		  }); 
+    	        },
+    	        error:function(jsonData){
+    	        	// $("#loading").hide();
+    	        	
+    	        	
+    	        }
+        });
+    });
+
+    
+    $("#saveAnnualScheduleBtn").click(function(e) {
+   	 e.preventDefault();
+   	//alert('Entered');
+   	 var TableData = []; //initialize array;
+
+        var sEntryList=""; //empty var;
+            //Here traverse and  read input/select values present in each td of each tr, ;
+             var rowCount = $('#table tr').length;   
+         	//console.log(rowCount);
+         	//alert(rowCount);
+        $("table > tbody > tr").each(function(row, tr) {
+        	
+         TableData[row]={
+        "fromDate": $('td:eq(1) input',this).val(),
+        "toDate": $('td:eq(2) input',this).val(),
+         "schBookNo":  $('td:eq(3) select',this).val()
+        }; 
+         
+        });
+
+        //Convert tableData array to JsonData
+        sEntryList=JSON.stringify(TableData);
+   	 console.log(sEntryList);
+   	$('#loading').html('<img width="50" height="50" src="./images/loader.gif"> <b>Please wait.... Saving the data');
+	    $.ajax({
+	    	type: 'POST',
+	        async: true,
+	        url: "/CCMS/annualScheduleSave",
+	        data: {'sEntryList': sEntryList,'sBook': $('#sBook').val()},
+	        success: function(result) {
+	           
+	            $('#loading').html('');
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	            alert('error');
+	        }
+	        
+	    });
+	});
+
+
+	</script>
+
+
+
+</body>
+</html>

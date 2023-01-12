@@ -1,0 +1,254 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>CDMS</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<link href="./css/sb-admin.css" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
+<style>
+.form-horizontal .control-label {
+	text-align:left;
+}
+
+</style>
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+  #page-wrapper{
+  margin-top:60px;
+  }
+  .form-control
+{
+width:60px;
+}
+table, th, td {
+  //border: 2px solid black;
+   border-style: solid;
+  border-color: coral;
+  border-collapse: collapse;
+}
+.header {
+font-size: 20px;
+color:#248003;
+font-style: oblique;
+ font-weight: bold;
+}
+
+</style>
+<style>
+#KW, #KVA, #KWH, #rKVAH, #rKVARH {
+width:220px;
+}
+</style>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+
+<div >
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/CCMS/login"><img src="./images/ccms_logo.jpg" alt=""></a>
+            </div>
+            <!-- Top Menu Items -->
+			<b><ul class="nav navbar-left top-nav" style="font-weight:bold; font-size:large">
+        <li class="dropdown" >
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i> User<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                         <li>
+                            <a href="/CCMS/login"><i class="fa fa-fw fa-lock"></i> Home</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/AddCCMSUser"><i class="fa fa-fw fa-user"></i> Add User</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/ViewAllCCMSUser"><i class="fa fa-fw fa-user"></i> Update User</a>
+                        </li>
+                        
+                        <li>
+                        <li>
+                            <a href="/CCMS/LocationHome"><i class="glyphicon glyphicon-map-marker"></i> Add Location</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/LocationUpdateView"><i class="glyphicon glyphicon-map-marker"></i> Update Location</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/CCMS/ccmsLogout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+			 
+			  <li class="hidden-xs"><a href="#"><i class="glyphicon glyphicon-comment"></i> About</a></li>
+                   
+			      <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i> Help</a></li>
+			       <li><a href="/CCMS/login"><i class="glyphicon glyphicon-home"></i> Home</a></li>		
+      </ul></b>
+
+			 <ul class="nav navbar-right hidden-xs">
+			    <li class="brand"><img src="images/SefeLogo.jpg"></li>
+			 </ul>
+           </div>
+           
+        </nav>
+ <div id="page-wrapper">
+    <div class="container-fluid">
+    <div class="row">
+   <div class="col-sm-4 col-sm-offset-2">
+   <div class="row">
+<div class="bs-example">
+<div class="header" style="font-weight: bold">${locationName}&emsp;${locationId} <br>Monitor <button type="button" name="startBtn" id="startBtn" class="btn btn-success" >Start</button> </div>
+       <table class="table" style="font-weight: bold; font-size:large">
+        <thead>
+            <tr>
+                <th></th>
+                <th>R Phase</th>
+                <th>Y Phase</th>
+                <th>B Phase</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Voltage (V)</td>			
+                <td><input class="form-control" id="rVrms" name="rVrms"></td>
+                <td><input class="form-control" id="yVrms" name="yVrms">  </td>
+                <td><input class="form-control" id="bVrms" name="bVrms">  </td>
+            </tr>
+             <tr>
+                <td>Current (A)</td>
+                <td><input class="form-control" id="rIrms" name="rIrms"></td>
+                <td><input class="form-control" id="yIrms" name="yIrms">  </td>
+                <td><input class="form-control" id="bIrms" name="bIrms">  </td>
+            </tr>
+              <tr>
+                <td>PowerFactor (PF)</td>
+                <td><input class="form-control" id="rPf" name="rPf"></td>
+                <td><input class="form-control" id="yPf" name="yPf">  </td>
+                <td><input class="form-control" id="bPf" name="bPf">  </td>
+            </tr>
+              <tr>
+                <td>Active Power (KW)</td>
+                <td><input class="form-control" id="rKW" name="rKW"></td>
+                <td><input class="form-control" id="yKW" name="yKW">  </td>
+                <td><input class="form-control" id="bKW" name="bKW">  </td>
+            </tr>
+             <tr>
+                <td>Net KW <br><br>Net KVA</td>
+                <td colspan="3"><input  class="form-control" id="KW" name="KW">
+                                 <input  class="form-control"  id="KVA" name="KVA"></td>
+            </tr> 
+             
+             <!--  <tr>
+                <td>Total KWH</td>
+                <td colspan="3"><input class="form-control" id="rKWH" name="rKWH"></td>
+                
+            </tr> -->
+                         <tr>
+                <td>Total KWH<br> <br> Total KVAH</td>
+                <td colspan="3"><input class="form-control" id="KWH" name="KWH">
+                                <input class="form-control" id="rKVAH" name="rKVAH"></td>
+                
+            </tr>
+
+             <tr>
+                <td>Total KVARH</td>
+                <td colspan="3"><input class="form-control" id="rKVARH" name="rKVARH"></td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+   </div>
+   <div id="loading"></div>
+   
+   
+    </div>
+   
+  </div></div>
+ 
+   
+</div> 
+
+<div class="footer text-center visible-xs">
+<p><img src="./images/jeneffco-logo.jpg"></p>
+</div>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script>
+var timer ;
+
+$("#stopBtn").click(function refreshText(){
+	
+	clearTimeout(timer);
+});
+
+
+$("#startBtn").click(function refreshText(){
+	$('#loading').html('<img width="50" height="50" src="./images/loader.gif"> <b>Please wait.... Reading the data');
+	flag=true;
+    $.ajax({
+    	 url: "/CCMS/ccmsMonitorAction",
+    	 dataType:"json",
+    	  success: function(jsonData){
+	        	//  $("#loading").hide();
+	        	$('#loading').html('');
+	        	  var obj = jQuery.parseJSON(jsonData );
+	        	  $('#rVrms').val(obj.rVrms);
+	        	  $('#rIrms').val(obj.rIrms);
+	        	  $('#rPf').val(obj.rPf);
+	        	$('#rKW').val(obj.rKW);
+	        	//.  $('#rKWH').val(obj.rKWH);
+	        	  $('#yVrms').val(obj.yVrms);
+	        	  $('#yIrms').val(obj.yIrms);
+	        	  $('#yPf').val(obj.yPf);
+	        	  $('#yKW').val(obj.yKW);
+	        	//$('#yKWH').val(obj.yKWH);
+	        	  $('#bVrms').val(obj.bVrms);
+	        	  $('#bIrms').val(obj.bIrms);
+	        	  $('#bPf').val(obj.bPf);
+	        	  $('#bKW').val(obj.bKW);
+	        	//  $('#bKWH').val(obj.bKWH);
+		         $('#KW').val(obj.KW);
+	        	 $('#KWH').val(obj.KWH);
+	        	 $('#KVA').val(obj.KVA);
+	        	 $('#rKVAH').val(obj.rKVAH);
+	        	 $('#rKVARH').val(obj.rKVARH);
+	        	 
+	        	  timer=setTimeout(refreshText, 10000);
+	        	 
+	        
+	        	  
+	        },
+	        error:function(jsonData){
+	        	// $("#loading").hide();
+	        	
+	        	
+	        }
+    });
+});
+
+
+</script>
+
+</body>
+</html>

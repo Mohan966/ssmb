@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>CDMS</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<link href="./css/sb-admin.css" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
+<style>
+.form-horizontal .control-label {
+	text-align:left;
+}
+</style>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+
+<div >
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/CCMS/login"><img src="./images/ccms_logo.jpg" alt=""></a>
+            </div>
+            <!-- Top Menu Items -->
+			<b><ul class="nav navbar-left top-nav">
+        <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i> User<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                         <li>
+                            <a href="/CCMS/login"><i class="fa fa-fw fa-lock"></i> Home</a>
+                        </li>
+                       <li>
+                            <a href="/CCMS/AddCCMSUser"><i class="fa fa-fw fa-user"></i> Add User</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/ViewAllCCMSUser"><i class="fa fa-fw fa-user"></i> Update User</a>
+                        </li>
+                        
+                        <li>
+                        <li>
+                            <a href="/CCMS/LocationHome"><i class="glyphicon glyphicon-map-marker"></i> Add Location</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/LocationUpdateView"><i class="glyphicon glyphicon-map-marker"></i> Update Location</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/CCMS/ccmsLogout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+			 
+			  <li class="hidden-xs"><a href="#"><i class="glyphicon glyphicon-comment"></i> About</a></li>
+                  
+			      <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i> Help</a></li>
+			       <li><a href="/CCMS/login"><i class="glyphicon glyphicon-home"></i> Home</a></li>		
+      </ul></b>
+
+			 <ul class="nav navbar-right hidden-xs">
+			    <li class="brand"><img src="images/SefeLogo.jpg"></li>
+			 </ul>
+           </div>
+           
+        </nav>
+        <form role="form" action="/CCMS/LocationUpdate" method="post">
+  <div id="page-wrapper">
+    <div class="container-fluid">
+   
+   <div class="row">
+   <div class="col-sm-8 col-sm-offset-2">
+    <h1 style="color:#5e3ee9"; class="page-header">Modify Location</h1>
+   <div class="row">
+   <div class="col-sm-6"><div class="form-group">                                                                                                                                                                       
+                                                                 
+                     <label>Select Location<span class="red">*</span></label>
+                     <s:select style="display: block;  width: 100%;     height: 34px;     padding: 6px 12px;    font-size: 14px;     line-height: 1.42857143;     color: #555;     background-color: #fff;    border: 1px solid #ccc;     border-radius: 4px;"  name="locationId"   list="locationList" listKey="locationId" id="locationId" listValue="displayLocationName" headerKey="0" headerValue="Select Locations"  /> 
+                                                   
+                     </div></div>
+   <div class="col-sm-6"><div class="form-group">
+                     <label>Location ID<span class="red">*</span></label>
+                     <input class="form-control" id="locationIds" name="locationIds" readonly> 
+                      <input type="hidden" class="form-control" id="locationName" name="locationName" >                                          
+                     </div></div>
+   
+<div class="col-sm-6"><div class="form-group">
+                     <label>Customer Name<span class="red">*</span></label>
+                  <!--<s:select style="display: block;  width: 100%;     height: 34px;     padding: 6px 12px;    font-size: 14px;     line-height: 1.42857143;     color: #555;     background-color: #fff;    border: 1px solid #ccc;     border-radius: 4px;"  headerKey="-1" listKey="scode" listValue="customerName" headerValue="Select Customers"  list="statesList" name="scode"  id="scode"/>
+                      -->  
+                      <input class="form-control"  id="customerName"  name="customerName" > 
+                                                     
+                     </div></div>
+                     
+                     <div class="col-sm-6"><div class="form-group">
+                     <label>No Of Lights Connected:</label>
+                     <input class="form-control" id="noOfLightsConnected" name="noOfLightsConnected">                                           
+                     </div></div>
+                     
+                      <div class="col-sm-6"><div class="form-group">
+                     <label>Latitude</label>
+                     <input class="form-control" id="latitude" name="latitude">                                           
+                     </div></div>
+                     
+                      <div class="col-sm-6"><div class="form-group">
+                     <label>Load Connected:(KW)</label>
+                     <input class="form-control" id="loadConnected" name="loadConnected">                                           
+                     </div></div>
+                     
+                     <div class="col-sm-6"><div class="form-group">
+                     <label>Longitude</label>
+                     <input class="form-control" id="longitude" name="longitude">                                           
+                     </div></div>
+                     
+                   <!--    <div class="col-sm-6"><div class="form-group" >
+                     <label>Regions<span class="red" color="red">*</span></label>
+                   <s:select style="display: block;  width: 100%;     height: 34px;     padding: 6px 12px;    font-size: 14px;     line-height: 1.42857143;     color: #555;     background-color: #fff;    border: 1px solid #ccc;     border-radius: 4px;"  name="dcode"  list="regionsList" listKey="dcode" id="dcode" listValue="regionName" headerKey="0" headerValue="Select Regions"/>
+                                   <div id="ajaxResponse"></div>   
+                     </div></div>
+                     
+                     <div class="col-sm-6"><div class="form-group">
+                     <label>Sub Regions<span class="red">*</span></label>
+                  <s:select style="display: block;  width: 100%;     height: 34px;     padding: 6px 12px;    font-size: 14px;     line-height: 1.42857143;     color: #555;     background-color: #fff;    border: 1px solid #ccc;     border-radius: 4px;"  name="mcode"   list="subregionsList" listKey="mcode" id="mcode" listValue="subregionName" headerKey="0" headerValue="Select Sub-Regions"  />
+
+                     </div></div>-->
+                     
+                     
+
+ 
+                    
+                     
+ 
+                    
+                     
+
+<div class="col-sm-6"><div class="form-group">
+                     <label>Sim No<span class="red">*</span></label>
+                     <input class="form-control" id="simNo" name="simNo">                                           
+                     </div></div>
+   </div>
+   <p class="text-right"><button type="submit" class="btn btn-success" >Update</button>&nbsp;&nbsp;&nbsp;<button type="button" name="delBtn" id="delBtn" class="btn btn-success" >Delete</button>
+    </div>
+  </div>
+</div> </div>
+</form>
+</div>
+
+<div class="footer text-center visible-xs">
+<p><img src="./images/jeneffco-logo.jpg"></p>
+</div>
+
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/jquery.js" type="text/javascript"></script>
+
+
+<script>
+$(document).ready(function() {
+	
+	$(function(){
+		$("#delBtn").click(function(){
+		    $.ajax({
+		        url: "/CCMS/removeLocation",
+		        data:{'locationId': $('#locationIds').val()},
+		        dataType:"json",
+		          success: function(jsonData){
+		        	 	        	  var obj = jQuery.parseJSON(jsonData );
+		        	 	        	  
+		        	 	        	  alert(obj.message);
+		        	 	        	  location.reload(true);
+		        	
+		        	  
+		        },
+		        error:function(jsonData){
+
+		        	
+		        }
+		    });
+		});
+		});
+	
+	/* $.ajax({
+	        url: "/CCMS/getLocation",
+	        data:{'locationId': $('#locationId').val()},
+	        dataType:"json",
+	          success: function(jsonData){
+	        	 
+	        	  var obj = jQuery.parseJSON(jsonData );
+	        	  $('#locationName').val(obj.locationName);
+	        	  $('#latitude').val(obj.latitude);
+	        	  $('#longitude').val(obj.longitude);
+	        	//  $('#ipAddress').val(obj.ipAddress);
+	        	  $('#loadConnected').val(obj.loadConnected);
+	        	  $('#noOfLightsConnected').val(obj.noOfLightsConnected);
+	        	  
+	        	  
+	        },
+	        error:function(jsonData){
+	        	
+	        	 $('#locationName').val("");
+	        	  $('#latitude').val("");
+	        	  $('#longitude').val("");
+	        	 // $('#ipAddress').val("");
+	        	  $('#loadConnected').val("");
+	        	  $('#noOfLightsConnected').val("");
+	        	
+	        }
+	    });*/
+	});
+
+
+/* $(function(){
+	 $('#locationId').change(function(){
+	    $.ajax({
+	        url: "/CCMS/getLocation",
+	        data:{'locationId': $('#locationId').val()},
+	        dataType:"json",
+	          success: function(jsonData){
+	        	 	        	  var obj = jQuery.parseJSON(jsonData );
+	        	  $('#locationName').val(obj.locationName);
+	        	  $('#latitude').val(obj.latitude);
+	        	  $('#longitude').val(obj.longitude);
+	        	 // $('#ipAddress').val(obj.ipAddress);
+	        	  $('#loadConnected').val(obj.loadConnected);
+	        	  $('#simNo').val(obj.simNo);
+	        	  $('#noOfLightsConnected').val(obj.noOfLightsConnected);
+	        	  
+	        },
+	        error:function(jsonData){
+
+	        	 $('#locationName').val("");
+	        	  $('#latitude').val("");
+	        	  $('#longitude').val("");
+	        	 // $('#ipAddress').val("");
+	        	  $('#loadConnected').val("");
+	        	  $('#simNo').val("");
+	        	  $('#noOfLightsConnected').val("");
+	        }
+	    });
+	});
+	}); */
+$(function(){
+	$('#scode').change(function(){
+		//alert ("Executing");
+	    $.ajax({
+	        url: "/CCMS/getRegions",
+	        data:{'scode': $('#scode').val()},
+	        dataType:"json",
+	          success: function(jsonData){
+ 	        	 // alert("im in");
+	              var rlist=jQuery.parseJSON(jsonData );
+	             // alert("regions List" + rlist.length);
+	              
+	              var options = $('#dcode');
+	                options.find('option')
+	                .remove()
+	                .end();
+	        
+	              options.append($("<option />").val("-1").text("Select Regions"));
+					
+				  rlist.map((item, i) =>  options.append($("<option />").val(item.dcode).text(item.regionName)) );
+	        	  
+	        },
+	        error:function(rjsonData){
+
+	        	 $('#dcode').val("");
+	        	  $('#regionName').val("");
+	        	  
+	        }
+	    });
+	});
+	$('#dcode').change(function(){
+		//alert ("Executing....");
+	    $.ajax({
+	        url: "/CCMS/getSubregions",
+	        data:{'scode': $('#scode').val(),'dcode': $('#dcode').val()},
+	        dataType:"json",
+	          success: function(jsonData){
+ 	        	  //alert("im in");
+	              var srlist=jQuery.parseJSON(jsonData );
+	             // alert("Sub regions List" + srlist.length);
+	              
+	              var options = $('#mcode');
+	                options.find('option')
+	                .remove()
+	                .end();
+	        
+	              options.append($("<option />").val("-1").text("Select Sub-Regions"));
+					
+				  srlist.map((item, i) =>  options.append($("<option />").val(item.mcode).text(item.subregionName)) );
+	        	  
+	        },
+	        error:function(rjsonData){
+
+	        	 $('#dcode').val("");
+	        	  $('#regionName').val("");
+	        	  
+	        }
+	    });
+	});		
+	$('#mcode').change(function(){
+		//alert ("Executing....");
+	    $.ajax({
+	        url: "/CCMS/getLocation",
+	        data:{'scode': $('#scode').val(),'dcode': $('#dcode').val(),'mcode': $('#mcode').val()},
+	        dataType:"json",
+	          success: function(jsonData){
+ 	        	  //alert("im in");
+	              var srlist=jQuery.parseJSON(jsonData );
+	            // alert("Locations" + srlist.length);
+	            // alert("Locations" + srlist);
+
+	              var options = $('#locationId');
+
+	                options.find('option')
+	                .remove()
+	                .end();
+	        
+	              options.append($("<option />").val("-1").text("Select Locations"));
+					
+				  srlist.map((item, i) =>  options.append($("<option />").val(item.locationId).text(item.locationId)) );
+	        	  
+	        },
+	        error:function(rjsonData){
+
+	        	 $('#locationId').val("");
+	        	  $('#locationName').val("");
+	        	  
+	        }
+	    });
+	});	
+	 $('#locationId').change(function(){
+		    $.ajax({
+		        url: "/CCMS/getLocations",
+		        data:{'locationId': $('#locationId').val()},
+		        dataType:"json",
+		          success: function(jsonData){
+		        	 	        	  var obj = jQuery.parseJSON(jsonData );
+		        	  $('#locationName').val(obj.locationName);
+		        	  $('#latitude').val(obj.latitude);
+		        	  $('#longitude').val(obj.longitude);
+		        	 $('#customerName').val(obj.customerName);
+		        	  $('#loadConnected').val(obj.loadConnected);
+		        	  $('#simNo').val(obj.simNo);
+		        	  $('#noOfLightsConnected').val(obj.noOfLightsConnected);
+		        	  $('#locationIds').val(obj.locationId);
+		        	  
+		        },
+		        error:function(jsonData){
+
+		        	 //$('#locationName').val("");
+		        	  $('#latitude').val("");
+		        	  $('#longitude').val("");
+		        	 // $('#ipAddress').val("");
+		        	  $('#loadConnected').val("");
+		        	  $('#simNo').val("");
+		        	  $('#noOfLightsConnected').val("");
+		        }
+		    });
+		});
+});
+/*$(function(){
+	$("#delBtn").onclick(function(){
+	    $.ajax({
+	        url: "/CCMS/removeLocation",
+	        data:{'locationId': $('#locationId').val()},
+	        dataType:"json",
+	          success: function(jsonData){
+	        	 	        	  var obj = jQuery.parseJSON(jsonData );
+	        	 	        	  
+	        	 	        	  alert(obj.message);
+	        	
+	        	  
+	        },
+	        error:function(jsonData){
+
+	        	
+	        }
+	    });
+	});
+	});*/
+
+ 
+	
+
+</script>
+</body>
+</html>

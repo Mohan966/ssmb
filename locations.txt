@@ -1,0 +1,13 @@
+select *from ccms_locations;
+
+INSERT INTO ccms_locations (state_code, dcode, mcode,location_id,location_name,latitude,longitude,no_lights_connected,simno,location_port,customer_name,load_connected) 
+VALUES (0, 13, 0,1238,'sustech mm MLC 1',17.4790876,78.580988,1,8919956258,0,'SUSTECH',0);
+
+UPDATE ccms_locations SET scode =01 WHERE location_name = 'sustech mm MLC 1';
+UPDATE ccms_locations SET mcode =01 WHERE location_id = '1238';
+
+
+UPDATE ccms_locations SET scode =01 WHERE location_id= '1237';
+
+select *from ccms_locations;
+

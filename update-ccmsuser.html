@@ -1,0 +1,259 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>CDMS</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<link href="./css/sb-admin.css" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
+<style>
+.form-horizontal .control-label {
+	text-align:left;
+}
+lable{
+  color: black;
+
+}
+</style>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<%  String message=(String)session.getAttribute("MESSAGE");
+session.removeAttribute("MESSAGE");
+%>
+
+<script type="text/javascript">
+    var msg = "<%=message%>";
+    if(msg!=null && msg!="null"){
+    alert(msg); }
+</script>
+<body>
+
+<div >
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/CCMS/login"><img src="./images/ccms_logo.jpg" alt=""></a>
+            </div>
+            <!-- Top Menu Items -->
+			<b><ul class="nav navbar-left top-nav">
+        <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i> User<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                         <li>
+                            <a href="/CCMS/login"><i class="fa fa-fw fa-lock"></i> Home</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/AddCCMSUser"><i class="fa fa-fw fa-user"></i> Add User</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/ViewAllCCMSUser"><i class="fa fa-fw fa-user"></i> Update User</a>
+                        </li>
+                        
+                        <li>
+                        <li>
+                            <a href="/CCMS/LocationHome"><i class="glyphicon glyphicon-map-marker"></i> Add Location</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/LocationUpdateView"><i class="glyphicon glyphicon-map-marker"></i> Update Location</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/CCMS/ccmsLogout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+			  
+			  <li class="hidden-xs"><a href="#"><i class="glyphicon glyphicon-comment"></i> About</a></li>
+                   
+			      <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i> Help</a></li>
+			       <li><a href="/CCMS/login"><i class="glyphicon glyphicon-home"></i> Home</a></li>		
+      </ul></b>
+
+			 <ul class="nav navbar-right hidden-xs">
+			    <li class="brand"><img src="images/SefeLogo.jpg"></li>
+			 </ul>
+           </div>
+           
+        </nav>
+        
+        <form role="form" action="/CCMS/UpdateUserRec" method="post">
+  <div id="page-wrapper">
+    <div class="container-fluid">
+   
+   <div class="row">
+   <div class="col-sm-8 col-sm-offset-2">
+    <h1 style="color:#5e3ee9"; class="page-header">User Update</h1>
+   <div class="row">
+   <%-- <div class="col-sm-6"><div class="form-group">
+   <label>Select Name<span class="red">*</span></label>
+                     <s:select style="display: block;  width: 100%;     height: 34px;     padding: 6px 12px;    font-size: 14px;     line-height: 1.42857143;     color: #555;     background-color: #fff;    border: 1px solid #ccc;     border-radius: 4px;"  headerKey="-1" listKey="displayValue" listValue="displayName" headerValue="Select Name"  list="namesList" name="name" />
+                     </div></div> --%>
+ 
+
+                     <!-- <div class="col-sm-6"><div class="form-group">
+                     <label>Customers:</label>
+                     <input class="form-control" id="scode" name="scode">                                           
+                     </div></div> -->
+                     <!-- <div class="col-sm-6"><div class="form-group">
+                     <label>Regions:</label>
+                     <input class="form-control" id="dcode" name="dcode">                                           
+                     </div></div> -->
+                     <!-- <div class="col-sm-6">
+                     <div class="form-group">
+                     <label>Subregions:</label>
+                     <input class="form-control" id="mcode" name="mcode">                                           
+                     </div></div> -->
+ 					 <!--<div class="col-sm-6">
+ 					 <div class="form-group">
+                     <label>LoactionId:</label>
+                     <input class="form-control" id="loactionId" name="mcode">                                           
+                     </div></div> -->
+                     
+                     <div class="col-sm-6"><div class="form-group">
+                     <label>Name :</label>
+                     
+                     <input class="form-control" id="name" name="name" value="<s:property value="name" />">                                           
+                     </div></div>
+                     
+                     <div class="col-sm-6"><div class="form-group">
+                     <label>Contact_No :</label>
+                     <input class="form-control" id="contactNo" name="contactNo" value="<s:property value="contactNo" />"> 
+                     <input type="hidden" class="form-control" id="contactNoOld" name="contactNoOld" value="<s:property value="contactNo" />">                                          
+                     </div></div>
+                     
+                     <div class="col-sm-6"><div class="form-group">
+                     <label>Designation :</label>
+                     <input class="form-control" id="designation" name="designation" value="<s:property value="designation" />">                                           
+                     </div></div>
+                     
+                     <!-- <div class="col-sm-6"><div class="form-group">
+                     <label>Contact_No:</label>
+                     <input class="form-control" id="contactNo" name="contactNo">                                           
+                     </div></div> -->
+     				 
+     				 <s:checkboxlist label="Events" list="event" name="yourEvent" value="selectedEvent" />
+     				 
+                <p class="text-right"><button type="submit" class="btn btn-success" >save</button>&nbsp;&nbsp;&nbsp;<button type="button" name="delBtn" id="delBtn" class="btn btn-success" >Delete</button>                    
+    </div>
+  </div>
+</form>
+   <div class="footer text-center visible-xs">
+<p><img src="./images/jeneffco-logo.jpg"></p>
+</div>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+
+<script>
+/*$(document).ready(function() {
+	
+	$(function(){
+		$("#delBtn").click(function(){
+		    $.ajax({
+		        url: "/CCMS/removeUserRec",
+		        data:{'name': $('#name').val()},
+		        dataType:"json",
+		          success: function(jsonData){
+		        	 	         var obj = jQuery.parseJSON(jsonData );
+		        	 	        
+		        	 	        	  location.reload();
+		        	 	        	  
+		        	 	        			        	
+		        	  
+		        },
+		        error:function(jsonData){
+
+		        	
+		        }
+		    });
+		});
+		});
+		$.ajax({
+
+		        url: "/CCMS/getNames",
+		        data:{'name': $('#name').val()},
+		        dataType:"json",
+		          success: function(jsonData){
+		        	  alert('json data:' + jsonData);
+		        	 	        	  var obj = jQuery.parseJSON(jsonData );
+		        	  $('#locationName').val(obj.locationName);
+		        	  $('#scode').val(obj.scode);
+		        	  $('#dcode').val(obj.dcode);
+		        	  $('#mcode').val(obj.mcode);
+		        	  $('#locationId').val(obj.locationId);
+		        	  $('#contactNo').val(obj.contactNo);
+		        	  $('#defaultEvent').val(obj.defaultEvent);
+		        	  
+		        },
+		        error:function(jsonData){
+
+		        	 $('#locationName').val("");
+		        	  $('#scode').val("");
+		        	  $('#dcode').val("");
+		        	 // $('#ipAddress').val("");
+		        	  $('#mcode').val("");
+		        	  $('#locationId').val("");
+		        	  $('#contactNo').val("");
+		        	  $('#defaultEvent').val("");
+		        }
+		    }); 
+});*/
+/*$(function(){
+	$('#name').change(function(){
+	    $.ajax({
+	        url: "/CCMS/getNames",
+	        data:{'name': $('#name').val()},
+	        dataType:"json",
+	          success: function(jsonData){
+	        	  alert('jsondata' + jsonData)
+	        	 	        	  var obj = jQuery.parseJSON(jsonData );
+	        	  $('#locationName').val(obj.locationName);
+	        	  $('#scode').val(obj.scode);
+	        	  $('#dcode').val(obj.dcode);
+	        	  $('#mcode').val(obj.mcode);
+	        	  $('#locationId').val(obj.locationId);
+	        	  $('#contactNo').val(obj.contactNo);
+	        	  $('#defaultEvent').val(obj.defaultEvent);
+	        	  
+	        	  
+	        },
+	        error:function(jsonData){
+
+	        	 $('#locationName').val("");
+	        	  $('#scode').val("");
+	        	  $('#dcode').val("");
+	        	 // $('#ipAddress').val("");
+	        	  $('#mcode').val("");
+	        	  $('#locationId').val("");
+	        	  $('#contactNo').val("");
+	        	  $('#defaultEvent').val("")
+	        }
+	    });
+	});
+	});*/
+	
+	</script>
+  
+
+</html>

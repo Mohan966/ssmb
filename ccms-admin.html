@@ -1,0 +1,570 @@
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ page import="com.sustech.beans.CCMSUser"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta http-equiv="refresh" content="120">
+<title>CCMS</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<link href="./css/sb-admin.css" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
+<style>
+.form-horizontal .control-label {
+	text-align: left;
+}
+
+aside {
+	float: right;
+	width: 20%;
+	float: right;
+	background-color: #00008e;
+	color: white;
+	padding: 5px;
+	margin: 10px;
+	height: 600px;
+}
+
+#loading {
+	padding-top: 50px;
+}
+
+.panel {
+	width: 200px;
+}
+
+.col-lg-3 {
+	width: 210px;
+}
+
+.unclickable-span {
+	pointer-events: none;
+	cursor: default;
+}
+
+.not-active {
+	pointer-events: none;
+	cursor: default;
+}
+
+.panel-pink {
+	background: #C71585;
+	color: #fff;
+}
+
+.panel-indianred {
+	background: #CD5C5C;
+	color: #fff;
+}
+
+.panel-dgreen {
+	background: #008000;
+	color: #fff;
+}
+
+.panel-seagreen {
+	background: #20B2AA;
+	color: #fff;
+}
+
+.panel-red {
+	background: #FF0000;
+	color: #fff;
+}
+
+.holder {
+	background-color: #36648B;
+	height: 650px;
+	overflow: hidden;
+	padding: 10px;
+	font-family: Helvetica;
+}
+
+</style>
+</head>
+<body>
+	<div id="wrapper">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"> 
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="C:/Users/ATS/Desktop/cc/ccms-admin.html"><img
+					src="./images/ccms_logo.jpg" alt=""></a>
+			</div>
+			<!-- Top Menu Items -->
+			
+				<ul class="nav navbar-left top-nav" style="font-weight:bold; font-size:large">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" aria-expanded="false"><i
+							class="fa fa-user"></i> User<b class="caret"></b></a>
+						<ul class="dropdown-menu" >
+							<li><a href="C:/Users/ATS/Desktop/cc/ccms-admin.html"><i class="fa fa-fw fa-lock"></i>
+									Home</a></li>
+							<li><a href="C:/Users/ATS/Desktop/cc/add-ccmsuser.html"><i
+									class="fa fa-fw fa-user"></i> Add User</a></li>
+							<li><a href="C:\Users\ATS\Desktop\cc\viewallusers-ccmsuser.html"><i
+									class="fa fa-fw fa-user"></i> Update User</a></li>
+							<li><a href="C:/Users/ATS/Desktop/cc/location-add.html"><i
+									class="glyphicon glyphicon-map-marker"></i> Add Location</a></li>
+							<li><a href="C:/Users/ATS/Desktop/cc/location-modify.html"><i
+									class="glyphicon glyphicon-map-marker"></i> Update Location</a></li>
+							<li class="divider"></li>
+							<li><a href="C:/Users/ATS/Desktop/cc/ccms-login.html"><i
+									class="fa fa-fw fa-power-off"></i> Log Out</a></li>
+						</ul></li>
+					<!--  <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Reports</a></li> -->
+					<li class="hidden-xs"><a href="#"><i
+							class="glyphicon glyphicon-comment"></i> About</a></li>
+					<!--    <li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a></li> -->
+					<li class="hidden-xs hidden-sm"><a href="#"><i
+							class="glyphicon glyphicon-question-sign"></i> Help</a></li>
+					<li><a href="C:/Users/ATS/Desktop/cc/ccms-admin.html"><i
+							class="glyphicon glyphicon-home"></i> Home</a></li>
+				</ul>
+			
+			<ul class="nav navbar-right hidden-xs">
+				<li class="brand"><img src="./images/SefeLogo.jpg"></li>
+			</ul>
+			<ul class="nav navbar-right hidden-xs" >
+				<li class="brand" ><s:iterator value="ccmsUser">
+                     UserName: 
+                    
+						<li><a id="type" href="#"
+							onclick="setType('<s:property value="userType")"></a></li>
+					</s:iterator></li>
+				<li class="brand"><a href="C:/Users/ATS/Desktop/cc/ccms-login.html"><i
+						class="fa fa-fw fa-power-off"></i> Log Out</a></li>
+			</ul>
+			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+			
+			</nav>
+			<nav class="navbar navbar-inverse" role="navigation">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+			<div class="collapse navbar-collapse navbar-ex1-collapse"> 
+				<ul class="nav navbar-nav side-nav">
+					<li><a href="#" style="font-size: 15px;">Locations <i class="fa fa-fw fa-plus pull-right"></i></a></li>
+					<li><a href="#" onclick="setLocation('0205','active','3 phase')">
+							<i class="glyphicon glyphicon-record active"></i>
+								0205 : 3 phase <br><p style="color:yellow; font-size:80%">Connected @ 02-01 17:06</p></a></li>
+				 </ul>
+			</div>
+			</div>
+
+			 
+			<!-- /.navbar-collapse -->
+			
+		</nav>
+	
+		
+	<!-- below 3 lines removed and added 4th line, by clubbing first and third lines
+		<div id="page-wrapper" style="overflow-y:hidden">-->
+			<!-- <h1 style="color: #5e3ee9;" class="page-header"></h1> -->
+		<!-- <div  class="row" style="margin:0px;"> -->
+			<div id="page-wrapper" class="row" style="margin:0px;overflow-y:hidden">
+			
+				<div class="col-lg-8 col-md-9" style="margin:0px;">
+					<div class="container-fluid" style="margin:0px;">
+				
+						<div class="row">
+							<div class="col-lg-3 col-md-4">
+								<div class="panel panel-primary border prymary">
+									<div class="panel-heading">
+										<div class="panel-body text-center">
+											<i class="fa fa-laptop fa-5x"></i>
+										</div>
+									</div>
+									<a href="#" onclick="monitorSubmit()">
+										<div class="panel-footer">
+											<span class="pull-left lead">Monitor</span> <span
+												class="pull-right"><i
+												class="fa fa-arrow-circle-right fa-2x"></i></span>
+											<div class="clearfix"></div>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<div class="panel panel-indianred">
+									<div class="panel-heading">
+										<div class="panel-body text-center" >
+											<i class="fa fa-gear fa-5x"></i>
+										</div>
+									</div>
+									<form name="phase" method="post"></form>
+									<a href="#" onclick="submit()">
+										<div class="panel-footer">
+											<span class="pull-left lead">Load Settings</span> <span
+												class="pull-right"><i
+												class="fa fa-arrow-circle-right fa-2x"></i></span>
+											<div class="clearfix"></div>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<div class="panel panel-dgreen">
+									<div class="panel-heading">
+										<div class="panel-body text-center">
+											<i class="fa fa-book fa-5x"></i>
+										</div>
+									</div>
+									<a href="#" onclick="viewSheduleBook()">
+										<div class="panel-footer">
+											<span class="pull-left lead">Schedule Book</span> <span
+												class="pull-right"><i
+												class="fa fa-arrow-circle-right fa-2x"></i></span>
+											<div class="clearfix"></div>
+										</div>
+									</a>
+								</div>
+							</div>
+							
+							
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-3 col-md-3">
+									<div class="panel panel-pink">
+										<div class="panel-heading">
+											<div class="panel-body text-center">
+												<i class="fa fa-list-alt fa-5x"></i>
+											</div>
+										</div>
+										<a href="#" onclick="reportSubmit()">
+											<div class="panel-footer">
+												<span class="pull-left lead">Day Report</span> <span
+													class="pull-right"><i
+													class="fa fa-arrow-circle-right fa-2x"></i></span>
+												<div class="clearfix"></div>
+											</div>
+										</a>
+									</div>
+								</div>
+							<div class="col-lg-3 col-md-3">
+									<div class="panel panel-seagreen">
+										<div class="panel-heading">
+											<div class="panel-body text-center">
+												<i class="fa fa-bolt fa-5x"></i>
+											</div>
+										</div>
+										<a href="#" onclick="maxSubmit()">
+											<div class="panel-footer">
+												<span class="pull-left lead">Protections</span> <span
+													class="pull-right"><i
+													class="fa fa-arrow-circle-right fa-2x"></i></span>
+												<div class="clearfix"></div>
+											</div>
+										</a>
+									</div>
+							</div>
+							
+							
+						</div>
+						<div class="row">
+						<div class="col-lg-3 col-md-3">
+								<div class="panel panel-green">
+									<div class="panel-heading">
+										<div class="panel-body text-center">
+											<i class="fa fa-table fa-5x"></i>
+										</div>
+									</div>
+									<a href="#" onclick="viewAnnualShedule()">
+										<div class="panel-footer">
+											<span class="pull-left lead">Annual Schedule</span> <span
+												class="pull-right"><i
+												class="fa fa-arrow-circle-right fa-2x"></i></span>
+											<div class="clearfix"></div>
+										</div>
+									</a>
+								</div>
+							</div>
+							
+						<div class="col-lg-3 col-md-3"> 
+								<div class="panel panel-red">
+									<div class="panel-heading">
+										<div class="panel-body text-center">
+											<i class="fa fa-calendar-times-o fa-5x"></i>
+										</div>
+									</div>
+									<a href="#" onclick="reportEventSubmit()" id="eventReport">
+										<div class="panel-footer">
+											<span class="pull-left lead">Events Report</span> <span
+												class="pull-right"><i
+												class="fa fa-arrow-circle-right fa-2x" id="eventReport"></i></span>
+											<div class="clearfix"></div>
+										</div>
+									</a>
+								</div>
+							</div>
+							
+							<div class="col-lg-3 col-md-4">
+								<div class="panel panel-yellow">
+									<div class="panel-heading">
+										<div class="panel-body text-center">
+											<i class="fa fa-map-marker fa-5x"></i>
+										</div>
+									</div>
+								 	<a href="C:/Users/ATS/Desktop/cc/cm-dashboard.html">
+										<div class="panel-footer">
+											<span class="pull-left lead">Dashboard</span> <span
+												class="pull-right"><i
+												class="fa fa-arrow-circle-right fa-2x"></i></span>
+											<div class="clearfix"></div>
+										</div>
+									</a> 
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4" style="display: none;">
+								<div class="panel panel-purple">
+									<div class="panel-heading">
+										<div class="panel-body text-center">
+											<i class="fa fa-bar-chart fa-5x"></i>
+										</div>
+									</div>
+									<a href="#" onclick="perfReportSubmit()">
+										<div class="panel-footer">
+											<span class="pull-left lead">Performance Report</span> <span
+												class="pull-right"><i
+												class="fa fa-arrow-circle-right fa-2x"></i></span>
+											<div class="clearfix"></div>
+										</div>
+									</a>
+								</div>
+							</div>
+							<!--  <div class="containersam">
+							<div class="childsam">  -->
+							<!-- Events report here -->
+							<!-- </div>
+							</div>  -->
+							<div id="loading"></div>
+						</div>
+						<!--  End of Row 2 -->
+					</div>
+				</div>
+				
+				<div class="col-lg-4 col-md-3" style="float:right;margin:-21px;width:300px;height:800px;">
+				 	<ol>
+					 	<marquee direction="up" behavior="scroll" bgcolor="#36648B" height="590px;" style="border: none 2px SOLID" scrollamount:"2" style:"display:block">
+					 		<s:iterator value="#session.EVENT_REPORT_LIST" status="eventReportStatus">
+					 		<li>
+								<span style="color:white;margin-left:20px;margin-bottom:15px;display:inline-block"><s:property value="locationId"/> - <s:property value="eventDesc"/></span>
+							</li>
+							</s:iterator>
+					 	</marquee>
+				 	</ol>
+				</div> 
+			
+			</div>
+		</div>
+	</div>
+		<div class="footer text-center visible-xs">
+			<input type="hidden" name="selectedLocation" id="selectedLocation">
+			<input type="hidden" name="selectedLocationStatus"
+				id="selectedLocationStatus"> 
+			<input type="hidden"
+				name="selectedLocationName" id="selectedLocationName"> 
+			<input type="hidden" name="selectedType" id="selectedType">
+			<!-- <input type="hidden" name="connected_on" id="connected_on">-->
+			<p>
+				<img src="./images/SefeLogo.jpg">
+			</p>
+		</div>
+		<script src="./js/jquery.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script>
+         $(document).ready(function(){
+        	
+         	$('#type').trigger('click')
+         });
+         removespan = function(span)
+         {
+         	span.parentNode.innerHTML =disabled;
+         	}
+         function setLocation(obj,status,name,con_time){
+         	
+         	document.getElementById("selectedLocation").value=obj;
+         	document.getElementById("selectedLocationStatus").value=status;
+         	document.getElementById("selectedLocationName").value=name;
+         	//document.getElementById("selectedLocationtime").value=connected_on;
+         	
+         	
+         }
+         
+         function setType(obj){
+         	
+         	document.getElementById("selectedType").value=obj;	
+         
+         }
+         
+         function submit(){
+         	$('#loading').html('<img width="20" height="20" src="./images/loader.gif"> <b>Please wait.... Reading the data');
+         	flag=true;
+         	if(!validate()){
+         		return false;
+         	}
+         	if(document.getElementById("selectedType").value=="client")
+         	{
+         		document.phase.action = "C:/Users/ATS/Desktop/cc/phase-settings.html?locationId="+document.getElementById("selectedLocation").value+"&locationName="+document.getElementById("selectedLocationName");
+         	    document.phase.submit()
+         	}
+         	else
+         	{
+         		document.phase.action = "C:/Users/ATS/Desktop/cc/phase-settings.html?locationId="+document.getElementById("selectedLocation").value+"&locationName="+document.getElementById("selectedLocationName").value;
+         	    document.phase.submit()
+         	}
+         	
+         }
+         
+         function monitorSubmit(){
+         	if(!validate()){
+         		return false;
+         	}
+         	document.phase.action = "C:/Users/ATS/Desktop/cc/ccms-monitor.html?locationId="+document.getElementById("selectedLocation").value+"&locationName="+document.getElementById("selectedLocationName").value;
+             document.phase.submit()
+         }
+         function reportSubmit(){
+         	if(document.getElementById("selectedLocation").value==""){
+         		alert("Please Select Location:")
+         		return false;
+         	}
+         	document.phase.action = "C:/Users/ATS/Desktop/cc/ccms-dayreport-show.html?locationId="+document.getElementById("selectedLocation").value+"&locationName="+document.getElementById("selectedLocationName").value;
+             document.phase.submit()
+         }
+         function reportEventSubmit(){
+         	if(document.getElementById("selectedLocation").value=="" ){
+         		alert("Please Select Location:")
+         		
+         		return false;
+         	}
+         	if(document.getElementById("selectedType").value=="client")
+         	{
+         		alert("You ar not accessible")
+         	}
+         	else
+         	{
+         	document.phase.action = "C:/Users/ATS/Desktop/cc/ccms-eventreport-show.html?locationId="+document.getElementById("selectedLocation").value+"&locationName="+document.getElementById("selectedLocationName").value;
+             document.phase.submit()
+         	}
+         }
+         function perfReportSubmit(){
+         	if(document.getElementById("selectedLocation").value==""){
+         		alert("Please Select Location:")
+         		return false;
+         	}
+         	document.phase.action = "/CCMS/viewPerfReport?locationId="+document.getElementById("selectedLocation").value+"&locationName="+document.getElementById("selectedLocationName").value;
+             document.phase.submit()
+         }
+         function viewSheduleBook(){
+         	if(!validate()){
+         		return false;
+         	}
+         	document.phase.action = "C:/Users/ATS/Desktop/cc/schedule-book.html?locationId="+document.getElementById("selectedLocation").value+"&locationName="+document.getElementById("selectedLocationName").value;
+             document.phase.submit()
+         }
+         function viewAnnualShedule(){
+         	if(!validate()){
+         		return false;
+         	}
+         	document.phase.action = "C:/Users/ATS/Desktop/cc/anual-schedule-book.html?locationId="+document.getElementById("selectedLocation").value+"&locationName="+document.getElementById("selectedLocationName").value;
+             document.phase.submit()
+         }
+         
+         
+         function maxSubmit(){
+         	$('#loading').html('<img width="20" height="20" src="./images/loader.gif"> <b>Please wait.... Reading the data');
+         	flag=true;
+         	if(!validate()){
+         		return false;
+         	}
+         	if(document.getElementById("selectedType").value=="client")
+         	{
+         		alert(" client has no access")
+         	}
+         	else
+         	{
+         		document.phase.action = "C:/Users/ATS/Desktop/cc/max-settings.html?locationId="+document.getElementById("selectedLocation").value+"&locationName="+document.getElementById("selectedLocationName").value;
+         	    document.phase.submit()
+         	}
+         	
+         }
+         function smsSubmit(){
+         	if(document.getElementById("selectedLocation").value==""){
+         		alert("Please Select Location:")
+         		return false;
+         	}
+         	document.phase.action = "/CCMS/CCMSUser?locationId="+document.getElementById("selectedLocation").value+"&locationName="+document.getElementById("selectedLocationName").value;
+             document.phase.submit()
+         }
+         function validate(){
+         	if(document.getElementById("selectedLocation").value==""){
+         		alert("Please Select Location:")
+         		return false;
+         	}
+         	
+         	if(document.getElementById("selectedLocationStatus").value==""){
+         		alert("Selected Location is Offline");
+         		return false;
+         	}
+         	return true;
+         }
+         
+//new script start 
+         
+      /*    jQuery.fn.liScroll = function(settings) {
+        		settings = jQuery.extend({
+        			travelocity: 0.03
+        			}, settings);		
+        			return this.each(function(){
+        					var $strip = jQuery(this);
+        					$strip.addClass("newsticker")
+        					var stripHeight = 1;
+        					$strip.find("li").each(function(i){
+        						stripHeight += jQuery(this, i).outerHeight(true); // thanks to Michael Haszprunar and Fabien Volpi
+        					});
+        					var $mask = $strip.wrap("<div class='mask'></div>");
+        					var $tickercontainer = $strip.parent().wrap("<div class='tickercontainer'></div>");								
+        					var containerHeight = $strip.parent().parent().height();	//a.k.a. 'mask' width 	
+        					$strip.height(stripHeight);			
+        					var totalTravel = stripHeight;
+        					var defTiming = totalTravel/settings.travelocity;	// thanks to Scott Waye		
+        					function scrollnews(spazio, tempo){
+        					$strip.animate({top: '-='+ spazio}, tempo, "linear", function(){$strip.css("top", containerHeight); scrollnews(totalTravel, defTiming);});
+        					}
+        					scrollnews(totalTravel, defTiming);				
+        					$strip.hover(function(){
+        					  jQuery(this).stop();
+        					},
+        					function(){
+        					  var offset = jQuery(this).offset();
+        					  var residualSpace = offset.top + stripHeight;
+        					  var residualTime = residualSpace/settings.travelocity;
+        					  scrollnews(residualSpace, residualTime);
+        					});			
+        			});	
+        	};
+
+        	$(function(){
+        	    $("ul#ticker01").liScroll();
+        	});
+          */
+         
+         
+      </script>
+</body>
+</html>

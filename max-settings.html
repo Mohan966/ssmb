@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>CDMS</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<link href="./css/sb-admin.css" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
+<style>
+.form-horizontal .control-label {
+	text-align:left;
+}
+   
+              h1{
+                 color:#248003; 
+                 padding-top:30px;
+                 font-weight: bold;
+                 font-style: italic;
+                 }
+            
+            
+
+.resizedTextbox {width: 80px; height: 30px;font-size: 18px; }
+</style>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+
+<div >
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/CCMS/login"><img src="./images/ccms_logo.jpg" alt=""></a>
+            </div>
+            <!-- Top Menu Items -->
+			<ul class="nav navbar-left top-nav" style="font-weight:bold; font-size:large">
+        <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i> User<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                         <li>
+                            <a href="/CCMS/login"><i class="fa fa-fw fa-lock"></i> Home</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/AddCCMSUser"><i class="fa fa-fw fa-user"></i> Add User</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/UpdateCCMSUser"><i class="fa fa-fw fa-user"></i> Update User</a>
+                        </li>
+                        
+                        <li>
+                        <li>
+                            <a href="/CCMS/LocationHome"><i class="glyphicon glyphicon-map-marker"></i> Add Location</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/LocationUpdateView"><i class="glyphicon glyphicon-map-marker"></i> Update Location</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/CCMS/ccmsLogout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+			 
+			  <li class="hidden-xs"><a href="#"><i class="glyphicon glyphicon-comment"></i> About</a></li>
+                  
+			      <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i> Help</a></li>
+			      <li><a href="/CCMS/login"><i class="fa fa-home"></i>Home</a></li>	
+      </ul>
+
+			 <ul class="nav navbar-right hidden-xs">
+			    <li class="brand"><img src="images/SefeLogo.jpg"></li>
+			 </ul>
+			  </nav>
+           </div>
+           
+       
+        <form role="form" action="/CCMS/maxSettingsAction" >
+  <div id="page-wrapper">
+    <div class="container-fluid">
+     <h1 style="text-align: center;">&emsp; ${locationName} &emsp;${locationId}&emsp; PROTECTIONS</h1>
+     <br>
+     <br>
+   <div class="row">
+   <div class="col-sm-8 col-sm-offset-2">
+   <div id="loading"></div>
+   <div class="row">
+   <table>
+  <fieldset>
+    <legend>Load 1:</legend>
+    
+   	<div class="col-sm-6"><div class="form-group" style="
+    padding-left: 61px;
+">
+                     <label>Over Load :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                     <input type="number" class="resizedTextbox" id="rPhaseLoadLimit" name="rPhaseLoadLimit" value="${rPhaseLoadLimit}">                                      
+                     
+                     
+                     <button type="button" name="btnRLoadLimit" id="btnRLoadLimit" class="btn btn-success" >Save</button>                                          
+                     </div></div>
+                     
+     <div class="col-sm-6"><div class="form-group" style="
+    padding-left: 61px;
+">
+                     <label>Under Load :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                     <input type="number" class="resizedTextbox" id="rPhaseUnderLoad" name="rPhaseUnderLoad" value="${rPhaseUnderLoad}">                                      
+                  
+                     
+                     <button type="button" name="btnrPhaseUnderLoad" id="btnrPhaseUnderLoad" class="btn btn-success" >Save</button>                                          
+                     </div></div>
+                     
+                     
+                     	<div class="col-sm-6"><div class="form-group" style="
+    padding-left: 61px;
+">
+                     <label>High Voltage :&nbsp;&nbsp;</label>
+                     <input type="number"  class="resizedTextbox" id="rPhaseOverVol" name="rPhaseOverVol" value="${rPhaseOverVol}">                                         
+                     
+                     
+                     <button type="button" name="btnrPhaseOverVol" id="btnrPhaseOverVol" class="btn btn-success" >Save</button>                                          
+                     </div></div>
+
+
+<div class="col-sm-6"><div class="form-group" style="
+    padding-left: 61px;
+">
+                     <label>Low Voltage : &nbsp;&nbsp; </label>
+                     <input type="number"  class="resizedTextbox" id="rPhaseUnderVol" name="rPhaseUnderVol" value="${rPhaseUnderVol}">                                          
+                    
+                     
+                     <button type="button" name="btnrPhaseUnderVol" id="btnrPhaseUnderVol" class="btn btn-success" >Save</button>                                          
+                     </div></div>
+                     </fieldset>
+                     
+                     
+                      <fieldset>
+    <legend>Load 2:</legend>
+   	<div class="col-sm-6"><div class="form-group" style="
+    padding-left: 61px;
+">
+                     <label>Over Load :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
+                     <input type="number"  class="resizedTextbox" id="yPhaseLoadLimit" name="yPhaseLoadLimit" value="${yPhaseLoadLimit}">                                      
+                 
+                     
+                     <button type="button" id="btnyPhaseLoadLimit" name="btnyPhaseLoadLimit" class="btn btn-success" >Save</button>                                          
+                     </div></div>
+                     
+                         
+     <div class="col-sm-6"><div class="form-group" style="
+    padding-left: 61px;
+">
+                     <label>Under Load :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                     <input type="number" class="resizedTextbox" id="yPhaseUnderLoad" name="yPhaseUnderLoad" value="${yPhaseUnderLoad}">                                      
+                    
+                     
+                     <button type="button" name="btnyPhaseUnderLoad" id="btnyPhaseUnderLoad" class="btn btn-success" >Save</button>                                          
+                     </div></div>
+                 
+                     
+                     	<div class="col-sm-6"><div class="form-group" style="
+    padding-left: 61px;
+">
+                     <label>High Voltage : &nbsp;&nbsp;</label>
+                     <input  type="number" class="resizedTextbox" id="yPhaseOverVol" name="yPhaseOverVol" value="${yPhaseOverVol}">                                         
+                    
+                     
+                     <button type="button" id="btnyPhaseOverVol" name="btnyPhaseOverVol" class="btn btn-success" >Save</button>                                          
+                     </div></div>
+
+
+<div class="col-sm-6"><div class="form-group" style="
+    padding-left: 61px;
+">
+                     <label>Low Voltage :&nbsp;&nbsp;</label>
+                     <input type="number"  class="resizedTextbox" id="yPhaseUnderVol" name="yPhaseUnderVol" value="${yPhaseUnderVol}">                                          
+                  
+                     
+                     <button type="button" class="btn btn-success" id="btnyPhaseUnderVol" name="btnyPhaseUnderVol" >Save</button>                                          
+                     </div></div>
+                     </fieldset>
+                     
+                      <fieldset>
+    <legend>Load 3:</legend>
+   	<div class="col-sm-6"><div class="form-group" style="
+    padding-left: 61px;
+">
+                     <label>Over Load :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                     <input  type="number" class="resizedTextbox" id="bPhaseLoadLimit" name="bPhaseLoadLimit" value="${bPhaseLoadLimit}">                                      
+                    
+                     
+                     <button type="button" id="btnbPhaseLoadLimit" name="btnbPhaseLoadLimit" class="btn btn-success" >Save</button>                                          
+                     </div></div>
+                     
+                         
+     <div class="col-sm-6"><div class="form-group" style="
+    padding-left: 61px;
+">
+                     <label>Under Load :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                     <input type="number" class="resizedTextbox" id="bPhaseUnderLoad" name="bPhaseUnderLoad" value="${bPhaseUnderLoad}">                                      
+                    
+                     <button type="button" name="btnbPhaseUnderLoad" id="btnbPhaseUnderLoad" class="btn btn-success" >Save</button>                                          
+                     </div></div>
+                 
+                     	<div class="col-sm-6"><div class="form-group" style="
+    padding-left: 61px;
+">
+                     <label>High Voltage :&nbsp;&nbsp; </label>
+                     <input type="number"  class="resizedTextbox" id="bPhaseOverVol" name="bPhaseOverVol" value="${bPhaseOverVol}">                                         
+                    
+                     
+                     <button type="button" class="btn btn-success" id="btnbPhaseOverVol" name="btnbPhaseOverVol">Save</button>                                          
+                     </div></div>
+
+
+<div class="col-sm-6"><div class="form-group" style="
+    padding-left: 61px;
+">
+                     <label>Low Voltage :&nbsp;&nbsp;</label>
+                     <input type="number"  class="resizedTextbox" id="bPhaseUnderVol" name="bPhaseUnderVol" value="${bPhaseUnderVol}">                                          
+                    
+                     
+                     <button type="button" class="btn btn-success" id="btnbPhaseUnderVol" name="btnbPhaseUnderVol" >Save</button>                                          
+                     </div></div>
+                     </fieldset>
+                     
+                     
+                      <fieldset>
+    <legend>Lux:</legend>
+   	<div class="col-sm-6"><div class="form-group" style="
+    padding-left: 61px;
+">
+                     <label>Lux Level :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                     <input type="number" class="resizedTextbox" id="rLuxLevelValue" name="rLuxLevelValue" value="${rLuxLevelValue}">                                      
+                    
+                     
+                     <button type="button" class="btn btn-success" id="btnluxLevel" name="btnluxLevel" >Save</button>                                          
+                     </div></div>
+                     	
+
+     
+                     </fieldset>
+                     
+                     </td></tr></table>
+ 
+   </div>
+   
+   
+   
+    </div>
+  </div>                       
+                        
+</div> </div>
+
+</form>
+<div class="footer text-center visible-xs">
+<p></p>
+</div>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function() {
+	
+	$("#btnRLoadLimit").click(function(e) {
+		$('#loading').html('<img width="50" height="50" src="./images/loader.gif"> <b>Please wait.... Saving the data');
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "/CCMS/maxSettingsSaveAction",
+	        data: { 
+	        	value: $("#rPhaseLoadLimit").val(),
+	        	optType: "12"
+	            
+	        },
+	        success: function(result) {
+	        	$('#loading').html('');
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	        	$('#loading').html('');
+	            alert('error');
+	        }
+	    });
+	});
+        
+        $("#btnrPhaseUnderLoad").click(function(e) {
+		$('#loading').html('<img width="50" height="50" src="./images/loader.gif"> <b>Please wait.... Saving the data');
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "/CCMS/maxSettingsSaveAction",
+	        data: { 
+	        	value: $("#rPhaseUnderLoad").val(),
+	        	optType: "37"
+	            
+	        },
+	        success: function(result) {
+	        	$('#loading').html('');
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	        	$('#loading').html('');
+	            alert('error');
+	        }
+	    });
+	});
+	
+	$("#btnrPhaseOverVol").click(function(e) {
+		$('#loading').html('<img width="50" height="50" src="./images/loader.gif"> <b>Please wait.... Saving the data');
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "/CCMS/maxSettingsSaveVoltageAction",
+	        data: { 
+	        	value: $("#rPhaseOverVol").val(),
+	        	optType: "15"
+	            
+	        },
+	        success: function(result) {
+	        	$('#loading').html('');
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	        	$('#loading').html('');
+	            alert('error');
+	        }
+	    });
+	});
+	
+	
+	$("#btnrPhaseUnderVol").click(function(e) {
+		$('#loading').html('<img width="50" height="50" src="./images/loader.gif"> <b>Please wait.... Saving the data');
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "/CCMS/maxSettingsSaveVoltageAction",
+	        data: { 
+	        	value: $("#rPhaseUnderVol").val(),
+	        	optType: "18"
+	            
+	        },
+	        success: function(result) {
+	        	$('#loading').html('');
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	        	$('#loading').html('');
+	            alert('error');
+	        }
+	    });
+	});
+	
+	
+	$("#btnyPhaseLoadLimit").click(function(e) {
+		$('#loading').html('<img width="50" height="50" src="./images/loader.gif"> <b>Please wait.... Saving the data');
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "/CCMS/maxSettingsSaveAction",
+	        data: { 
+	        	value: $("#yPhaseLoadLimit").val(),
+	        	optType: "13"
+	            
+	        },
+	        success: function(result) {
+	        	$('#loading').html('');
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	        	$('#loading').html('');
+	            alert('error');
+	        }
+	    });
+	});
+	
+	
+	$("#btnyPhaseUnderLoad").click(function(e) {
+		$('#loading').html('<img width="50" height="50" src="./images/loader.gif"> <b>Please wait.... Saving the data');
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "/CCMS/maxSettingsSaveAction",
+	        data: { 
+	        	value: $("#yPhaseUnderLoad").val(),
+	        	optType: "38"
+	            
+	        },
+	        success: function(result) {
+	        	$('#loading').html('');
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	        	$('#loading').html('');
+	            alert('error');
+	        }
+	    });
+	});
+	
+	$("#btnyPhaseOverVol").click(function(e) {
+		$('#loading').html('<img width="50" height="50" src="./images/loader.gif"> <b>Please wait.... Saving the data');
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "/CCMS/maxSettingsSaveVoltageAction",
+	        data: { 
+	        	value: $("#yPhaseOverVol").val(),
+	        	optType: "16"
+	            
+	        },
+	        success: function(result) {
+	        	$('#loading').html('');
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	        	$('#loading').html('');
+	            alert('error');
+	        }
+	    });
+	});
+	
+	$("#btnyPhaseUnderVol").click(function(e) {
+		$('#loading').html('<img width="50" height="50" src="./images/loader.gif"> <b>Please wait.... Saving the data');
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "/CCMS/maxSettingsSaveVoltageAction",
+	        data: { 
+	        	value: $("#yPhaseUnderVol").val(),
+	        	optType: "19"
+	            
+	        },
+	        success: function(result) {
+	        	$('#loading').html('');
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	        	$('#loading').html('');
+	            alert('error');
+	        }
+	    });
+	});
+	
+	
+	
+	$("#btnbPhaseLoadLimit").click(function(e) {
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "/CCMS/maxSettingsSaveAction",
+	        data: { 
+	        	value: $("#bPhaseLoadLimit").val(),
+	        	optType: "14"
+	            
+	        },
+	        success: function(result) {
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	            alert('error');
+	        }
+	    });
+	});
+	
+        $("#btnbPhaseUnderLoad").click(function(e) {
+		$('#loading').html('<img width="50" height="50" src="./images/loader.gif"> <b>Please wait.... Saving the data');
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "/CCMS/maxSettingsSaveAction",
+	        data: { 
+	        	value: $("#bPhaseUnderLoad").val(),
+	        	optType: "39"
+	            
+	        },
+	        success: function(result) {
+	        	$('#loading').html('');
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	        	$('#loading').html('');
+	            alert('error');
+	        }
+	    });
+	});
+	
+	$("#btnbPhaseOverVol").click(function(e) {
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "/CCMS/maxSettingsSaveVoltageAction",
+	        data: { 
+	        	value: $("#bPhaseOverVol").val(),
+	        	optType: "17"
+	            
+	        },
+	        success: function(result) {
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	            alert('error');
+	        }
+	    });
+	});
+	
+	
+	$("#btnbPhaseUnderVol").click(function(e) {
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "/CCMS/maxSettingsSaveVoltageAction",
+	        data: { 
+	        	value: $("#bPhaseUnderVol").val(),
+	        	optType: "20"
+	            
+	        },
+	        success: function(result) {
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	            alert('error');
+	        }
+	    });
+	});
+	
+	
+	$("#btnluxLevel").click(function(e) {
+		 e.preventDefault();
+		$('#loading').html('<img width="50" height="50" src="./images/loader.gif"> <b>Please wait.... Saving the data');
+	    $.ajax({
+	        type: "POST",
+	        url: "/CCMS/maxSettingsSaveVoltageAction",
+	        data: { 
+	        	value: $("#rLuxLevelValue").val(),
+	        	optType: "34"
+	            
+	        },
+	        success: function(result) {
+	        	$('#loading').html('');
+	            alert('Saved Successfully');
+	        },
+	        error: function(result) {
+	            alert('error');
+	        }
+	    });
+	});
+	
+	});
+</script>
+
+</body>
+</html>

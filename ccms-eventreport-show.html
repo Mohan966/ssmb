@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>CDMS</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+<link href="./css/sb-admin.css" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
+<link href="./css/table.css" rel="stylesheet">
+
+<style>
+select{
+color: #000;
+font-style: normal;
+}
+.page-header{
+margin-top: 90px;
+}
+.form-horizontal .control-label {
+	text-align:left;
+}
+#ul1id{width:120%;}
+
+</style>
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+    
+    
+</style>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body style="background-color:#eef8df">
+<img id="loading" style="display: none;"  alt="Updating ..." src="./images/processing.gif" />
+	<div>
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/CCMS/login"><img
+					src="./images/ccms_logo.jpg" alt=""></a>
+			</div>
+			<!-- Top Menu Items -->
+			<ul class="nav navbar-left top-nav" style="font-weight:bold; font-size:large">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" aria-expanded="false"><i
+						class="fa fa-user"></i> User<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="/CCMS/login"><i class="fa fa-fw fa-lock"></i>
+								Home</a></li>
+						<li>
+                            <a href="/CCMS/AddCCMSUser"><i class="fa fa-fw fa-user"></i> Add User</a>
+                        </li>
+                        <li>
+                            <a href="/CCMS/UpdateCCMSUser"><i class="fa fa-fw fa-user"></i> Update User</a>
+                        </li>
+                        
+                        <li>
+						<li><a href="/CCMS/LocationHome"><i
+								class="glyphicon glyphicon-map-marker"></i> Add Location</a></li>
+						<li><a href="/CCMS/LocationUpdateView"><i
+								class="glyphicon glyphicon-map-marker"></i> Update Location</a></li>
+						<li class="divider"></li>
+						<li><a href="/CCMS/ccmsLogout"><i
+								class="fa fa-fw fa-power-off"></i> Log Out</a></li>
+					</ul></li>
+				
+				<li class="hidden-xs"><a href="#"><i
+						class="glyphicon glyphicon-comment"></i> About</a></li>
+				
+				<li><a href="#"><i
+						class="glyphicon glyphicon-question-sign"></i> Help</a></li>
+						 <li><a href="/CCMS/login"><i class="glyphicon glyphicon-home"></i> Home</a></li>	
+			</ul>
+
+			<ul class="nav navbar-right hidden-xs">
+				<li class="brand"><img src="images/SefeLogo.jpg"></li>
+			</ul>
+			</nav>
+	</div>
+           
+        
+        
+     
+          
+<form name="rptForm" action="/CCMS/viewEventReport1">
+
+   <p class="text-left"><h1 style="color:#248003; font-weight:bold; font-style: italic; text-align:center;" class="page-header">${locationName} &emsp;${locationId}&emsp; Event Report<br><br><br>
+     <label style="color:black;" >Select Date <i style="color:blue; font-size:80%">( MM/DD/YYYY ) :</i></label> <s:select headerKey="-1" headerValue="Select Value" list="eventReportDates" name="selDate" 	 />
+  &emsp;&emsp;<button type="submit" onclick="viewReport()" name="stopBtn" id="stopBtn" class="btn btn-success" >View Report</button> 
+              <button type="button" onclick="downloadReport()" name="stopBtn" id="stopBtn" class="btn btn-success" >Download</button>
+
+   </h1> 
+   </p>
+                     
+                 
+		 <table >
+        <thead>
+            <tr>
+            <th>SNO</th>
+                <th >Date</th>
+                <th >Time</th>
+                <th >Event Source</th>
+                <th >Event Description</th>
+            </tr>
+            
+        </thead>
+        <tbody>
+     
+        
+       
+         <s:iterator value="eventReport"  >
+          <td><s:property value="eventDate"/></td><td><s:property value="eventTime"/></td>
+          <td><s:property value="eventSource"/></td><td><s:property value="eventDesc"/></td>
+          </tr>
+          </s:iterator>
+        </tbody>
+    </table>
+
+
+</form>
+
+
+<div class="footer text-center visible-xs">
+<p><img src="./images/jeneffco-logo.jpg"></p>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+ <script>
+ function goBack() {
+	    window.history.back()
+	}
+function viewReport(){
+		
+	 
+	 document.rptForm.action = "/CCMS/viewEventReport1?selDate="+document.getElementById("selDate").value;
+	    document.rptForm.submit()
+	    
+ }
+function downloadReport(){
+	
+	 
+	 document.rptForm.action = "/CCMS/downloadFile"
+	    document.rptForm.submit()
+	    
+}
+//function downloadReport2(){
+	
+	 
+//	 document.rptForm.action = "/CCMS/readEvents"
+//	    document.rptForm.submit()
+	    
+//}
+  </script>
+</body>
+</html>
